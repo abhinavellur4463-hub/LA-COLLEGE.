@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LA College | Medical College</title>
+<meta name="description" content="LA College medical programmes, online admission form and student records.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f2a3d;
+    --ink-soft:#3d5566;
+    --teal:#0b6e74;
+    --teal-dark:#08555a;
+    --mint:#ddefee;
+    --paper:#f6f9f9;
+    --white:#ffffff;
+    --line:#c9d8da;
+    --pulse:#c8372d;
+    --ok:#1b7a43;
+    --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+  a{color:var(--teal)}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:4px}
+  .wrap{width:min(1080px,100% - 32px);margin-inline:auto}
+
+  /* header */
+  header.site{position:sticky;top:0;z-index:10;background:rgba(246,249,249,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;flex-wrap:wrap}
+  .brand{font-family:var(--serif);font-weight:700;font-size:1.35rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+  .brand .mark{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-family:var(--sans);font-size:.8rem;font-weight:700;letter-spacing:.02em}
+  nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex-wrap:wrap}
+  nav a{display:block;padding:8px 14px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:500}
+  nav a:hover{background:var(--mint)}
+
+  /* hero */
+  .hero{padding:72px 0 0;border-bottom:1px solid var(--line);background:var(--white)}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,6.5vw,4.6rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 20px;max-width:14ch}
+  .hero p.lead{font-size:1.15rem;color:var(--ink-soft);max-width:56ch;margin:0 0 28px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;font:inherit;font-weight:600;padding:12px 22px;border-radius:999px;border:2px solid var(--teal);background:var(--teal);color:#fff;text-decoration:none;cursor:pointer}
+  .btn:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
+  .btn.ghost{background:transparent;color:var(--teal)}
+  .btn.ghost:hover{background:var(--mint)}
+  .btn.small{padding:6px 14px;font-size:.9rem}
+  .btn.danger{background:transparent;border-color:var(--pulse);color:var(--pulse)}
+  .btn.danger:hover{background:var(--pulse);color:#fff}
+  .ecg{display:block;width:100%;height:110px;margin-top:40px}
+  .ecg path{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .ecg .blip{stroke:var(--pulse)}
+  @media (prefers-reduced-motion:no-preference){
+    .ecg path{stroke-dasharray:2400;stroke-dashoffset:2400;animation:draw 3.2s ease-out .3s forwards}
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* sections */
+  section.block{padding:72px 0;border-bottom:1px solid var(--line)}
+  section.block.alt{background:var(--white)}
+  h2{font-family:var(--serif);font-size:clamp(1.7rem,3.5vw,2.4rem);line-height:1.15;letter-spacing:-.01em;margin:0 0 10px}
+  .intro{color:var(--ink-soft);max-width:60ch;margin:0 0 36px}
+
+  /* courses */
+  .course{display:grid;grid-template-columns:1.4fr 1fr 1.6fr auto;gap:20px;align-items:center;padding:20px 0;border-top:1px solid var(--line)}
+  .course:last-child{border-bottom:1px solid var(--line)}
+  .course h3{margin:0;font-family:var(--serif);font-size:1.25rem}
+  .course h3 small{display:block;font-family:var(--sans);font-weight:400;font-size:.9rem;color:var(--ink-soft)}
+  .course .meta{font-weight:600}
+  .course .meta span,.course .elig span{display:block;font-weight:400;font-size:.85rem;color:var(--ink-soft)}
+  .course .elig{font-size:.95rem}
+  @media (max-width:820px){
+    .course{grid-template-columns:1fr 1fr;gap:12px}
+    .course .elig{grid-column:1 / -1}
+  }
+
+  /* admission */
+  .admission-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:48px}
+  @media (max-width:860px){.admission-grid{grid-template-columns:1fr;gap:28px}}
+  .steps{margin:0;padding-left:20px;color:var(--ink-soft)}
+  .steps li{margin-bottom:10px}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+  .full{grid-column:1 / -1}
+  @media (max-width:560px){form{grid-template-columns:1fr}}
+  fieldset{grid-column:1 / -1;border:0;border-top:1px solid var(--line);padding:14px 0 0;margin:6px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
+  @media (max-width:560px){fieldset{grid-template-columns:1fr}}
+  legend{font-family:var(--serif);font-weight:700;font-size:1.1rem;padding:0 10px 0 0}
+  label{display:block;font-weight:600;font-size:.92rem;margin-bottom:5px}
+  label .opt{font-weight:400;color:var(--ink-soft)}
+  input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px}
+  input:hover,select:hover,textarea:hover{border-color:var(--teal)}
+  textarea{min-height:84px;resize:vertical}
+  .err{color:var(--pulse);font-size:.85rem;min-height:1.2em;margin-top:3px}
+  [aria-invalid="true"]{border-color:var(--pulse)}
+  .status-msg{grid-column:1 / -1;padding:12px 14px;border-radius:6px;background:var(--mint);border-left:4px solid var(--ok);display:none}
+  .status-msg.show{display:block}
+
+  /* records */
+  .toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  .toolbar input{max-width:320px}
+  .toolbar .count{margin-left:auto;color:var(--ink-soft);font-weight:500}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+  table{width:100%;border-collapse:collapse;min-width:720px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+  th{background:var(--mint);font-size:.9rem}
+  tbody tr:last-child td{border-bottom:0}
+  td.id{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+  td.row-actions{white-space:nowrap;display:flex;gap:8px;border-bottom:0}
+  td.row-actions{border-bottom:1px solid var(--line)}
+  tbody tr:last-child td.row-actions{border-bottom:0}
+  td select{padding:6px 8px;width:auto}
+  .empty{padding:36px 16px;text-align:center;color:var(--ink-soft)}
+  .note{margin-top:14px;font-size:.9rem;color:var(--ink-soft);max-width:70ch}
+
+  dialog{border:0;border-radius:10px;padding:0;width:min(560px,calc(100% - 32px));box-shadow:0 20px 60px rgba(15,42,61,.3);color:var(--ink)}
+  dialog::backdrop{background:rgba(15,42,61,.5)}
+  .dlg-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--mint)}
+  .dlg-head h3{margin:0;font-family:var(--serif)}
+  .dlg-body{padding:18px 20px}
+  .dlg-body dl{margin:0;display:grid;grid-template-columns:150px 1fr;gap:8px 14px}
+  .dlg-body dt{font-weight:600}
+  .dlg-body dd{margin:0;overflow-wrap:anywhere}
+
+  body.editing [data-key]{outline:2px dashed var(--teal);outline-offset:3px;cursor:text;border-radius:3px}
+  body.editing footer{padding-bottom:110px}
+  .editbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:#fff;padding:12px 16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;box-shadow:0 -6px 24px rgba(0,0,0,.25)}
+  .editbar[hidden]{display:none}
+  .editbar span{flex:1 1 260px;font-size:.92rem}
+  .editbar .btn{background:#fff;color:var(--ink);border-color:#fff}
+  .editbar .btn.danger{background:transparent;color:#ffb3ad;border-color:#ffb3ad}
+  .course-edit{display:grid;grid-template-columns:1fr 2fr 1fr 2fr auto;gap:12px;align-items:end;padding:16px 0;border-top:1px solid var(--line)}
+  .course-edit label{font-size:.8rem}
+  @media (max-width:820px){.course-edit{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.course-edit{grid-template-columns:1fr}.dlg-body dl{grid-template-columns:1fr}}
+  .dlg-body .err{grid-column:1 / -1}
+  .dlg-body dd input,.dlg-body dd select,.dlg-body dd textarea{padding:7px 9px}
+  footer{padding:36px 0;background:var(--ink);color:#d6e3e6}
+  footer a{color:#fff}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" id="brandLink"><span class="mark" id="mark" aria-hidden="true">LA</span><span data-key="collegeName">LA College</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#admission">Admission</a></li>
+        <li><a href="#students">Student records</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="btn small ghost" id="editToggle" type="button">Edit site</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <h1 data-key="heroTitle">Learn medicine where patients are.</h1>
+      <p class="lead" data-key="heroLead">LA College is a medical college offering degree programmes in medicine, dentistry, nursing and allied health. Pick a programme, fill in the admission form, and the office can track every application in one list.</p>
+      <div class="actions">
+        <a class="btn" href="#admission">Apply for admission</a>
+        <a class="btn ghost" href="#courses">See courses</a>
+      </div>
+      <svg class="ecg" viewBox="0 0 1200 110" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70 H180 L200 70 L215 55 L230 70 H300 L318 78 L340 8 L362 102 L380 70 H470 L490 62 L510 70 H700 L720 70 L735 55 L750 70 H820 L838 78 L860 8 L882 102 L900 70 H990 L1010 62 L1030 70 H1200"/>
+        <path class="blip" d="M338 12 L340 8 L362 102 L364 98" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="block alt" id="courses">
+    <div class="wrap">
+      <h2>Courses</h2>
+      <p class="intro" data-key="coursesIntro">Six programmes across medicine and allied health. Choose Apply on any row and the admission form opens with that course selected.</p>
+      <div id="courseList"></div>
+      <p class="note" id="courseNote">Durations and eligibility shown are sample details. Choose Edit site at the top to change, add or remove courses.</p>
+    </div>
+  </section>
+
+  <section class="block" id="admission">
+    <div class="wrap admission-grid">
+      <div>
+        <h2>Admission</h2>
+        <p class="intro">Applications for the 2026–27 session are open. It takes about five minutes.</p>
+        <ol class="steps">
+          <li>Choose the programme you are applying for.</li>
+          <li>Enter your personal, guardian and academic details.</li>
+          <li>Save the application. You get an application number such as LAC-2026-0001.</li>
+          <li>The admissions office reviews it and updates the status under Student records.</li>
+        </ol>
+      </div>
+
+      <form id="admissionForm" novalidate>
+        <div class="status-msg" id="saveMsg" role="status" aria-live="polite"></div>
+
+        <fieldset>
+          <legend>Programme</legend>
+          <div class="full" style="grid-column:1 / -1">
+            <label for="course">Course applied for</label>
+            <select id="course" name="course" required></select>
+            <div class="err" data-for="course"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Student details</legend>
+          <div class="full" style="grid-column:1 / -1">
+            <label for="name">Full name</label>
+            <input id="name" name="name" autocomplete="name" required>
+            <div class="err" data-for="name"></div>
+          </div>
+          <div>
+            <label for="dob">Date of birth</label>
+            <input id="dob" name="dob" type="date" required>
+            <div class="err" data-for="dob"></div>
+          </div>
+          <div>
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="">Select</option>
+              <option>Female</option>
+              <option>Male</option>
+              <option>Other</option>
+            </select>
+            <div class="err" data-for="gender"></div>
+          </div>
+          <div>
+            <label for="phone">Mobile number</label>
+            <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="10 digits" required>
+            <div class="err" data-for="phone"></div>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <div class="err" data-for="email"></div>
+          </div>
+          <div class="full" style="grid-column:1 / -1">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" autocomplete="street-address" required></textarea>
+            <div class="err" data-for="address"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Guardian</legend>
+          <div>
+            <label for="guardian">Parent or guardian name</label>
+            <input id="guardian" name="guardian" required>
+            <div class="err" data-for="guardian"></div>
+          </div>
+          <div>
+            <label for="guardianPhone">Guardian mobile number</label>
+            <input id="guardianPhone" name="guardianPhone" type="tel" inputmode="numeric" placeholder="10 digits" required>
+            <div class="err" data-for="guardianPhone"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Academic details</legend>
+          <div>
+            <label for="board">12th board</label>
+            <input id="board" name="board" placeholder="e.g. State board, CBSE" required>
+            <div class="err" data-for="board"></div>
+          </div>
+          <div>
+            <label for="percent">Physics, Chemistry, Biology average (%)</label>
+            <input id="percent" name="percent" type="number" min="0" max="100" step="0.01" required>
+            <div class="err" data-for="percent"></div>
+          </div>
+          <div>
+            <label for="neet">NEET score <span class="opt">(optional)</span></label>
+            <input id="neet" name="neet" type="number" min="0" max="720" step="1">
+            <div class="err" data-for="neet"></div>
+          </div>
+        </fieldset>
+
+        <div class="full">
+          <button class="btn" type="submit">Save application</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="block alt" id="students">
+    <div class="wrap">
+      <h2>Student records</h2>
+      <p class="intro">Every saved application appears here. Search by name, application number or course, change a status, or download the list.</p>
+
+      <div class="toolbar">
+        <label for="search" class="sr" style="position:absolute;left:-9999px">Search records</label>
+        <input id="search" type="search" placeholder="Search name, number or course">
+        <button class="btn ghost small" id="exportBtn" type="button">Download CSV</button>
+        <span class="count" id="count" aria-live="polite"></span>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Number</th><th>Name</th><th>Course</th><th>Mobile</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>No applications yet. Fill in the admission form to add the first student.</div>
+      </div>
+      <p class="note">Records are saved in this browser on this device only. They are not sent to a server, so clear-browsing-data or switching devices will not carry them over. Download the CSV regularly to keep a backup. Because this list holds personal details, do not publish this page publicly without adding a secure login and a database.</p>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="intro" data-key="contactText" style="white-space:pre-line">Admissions office, LA College.
+Address: add your address here.
+Phone: add your phone number here.
+Email: add your email here.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="yr"></span> <span id="footName">LA College</span></div>
+    <div><a href="#top">Back to top</a></div>
+  </div>
+</footer>
+
+<div class="editbar" id="editBar" hidden>
+  <span>Edit mode: click any text with a dashed outline to change it. Changes save automatically in this browser.</span>
+  <button class="btn small" id="backupBtn" type="button">Backup everything</button>
+  <button class="btn small" id="restoreBtn" type="button">Restore backup</button>
+  <input type="file" id="restoreFile" accept="application/json,.json" hidden>
+  <button class="btn small danger" id="resetBtn" type="button">Reset site text and courses</button>
+</div>
+
+<dialog id="detail" aria-labelledby="dlgTitle">
+  <div class="dlg-head">
+    <h3 id="dlgTitle">Student details</h3>
+    <button class="btn ghost small" type="button" id="dlgClose">Close</button>
+  </div>
+  <div class="dlg-body"><dl id="dlgBody"></dl></div>
+</dialog>
+
+<script>
+/* ---- Edit this list to match your college's real programmes ---- */
+const DEFAULT_COURSES = [
+  {code:'MBBS',  name:'Bachelor of Medicine and Bachelor of Surgery', years:'5.5 years', elig:'12th with Physics, Chemistry and Biology; NEET-UG qualified'},
+  {code:'BDS',   name:'Bachelor of Dental Surgery',                   years:'5 years',   elig:'12th with Physics, Chemistry and Biology; NEET-UG qualified'},
+  {code:'B.Sc Nursing', name:'Bachelor of Science in Nursing',        years:'4 years',   elig:'12th with Physics, Chemistry and Biology'},
+  {code:'BPT',   name:'Bachelor of Physiotherapy',                    years:'4.5 years', elig:'12th with Physics, Chemistry and Biology'},
+  {code:'B.Pharm', name:'Bachelor of Pharmacy',                       years:'4 years',   elig:'12th with Physics, Chemistry and Mathematics or Biology'},
+  {code:'DMLT',  name:'Diploma in Medical Laboratory Technology',     years:'2 years',   elig:'12th with Science subjects'}
+];
+const SITE_KEY = 'la_college_site_v1';
+function loadSite(){
+  try{ const d = JSON.parse(localStorage.getItem(SITE_KEY) || 'null'); return d && typeof d === 'object' ? d : {}; }
+  catch(e){ return {}; }
+}
+let site = loadSite();
+site.texts = site.texts && typeof site.texts === 'object' ? site.texts : {};
+let courses = Array.isArray(site.courses) ? site.courses : DEFAULT_COURSES.map(c => Object.assign({}, c));
+function saveSite(){
+  site.courses = courses;
+  try{ localStorage.setItem(SITE_KEY, JSON.stringify(site)); }catch(e){}
+}
+const STATUSES = ['Applied','Under review','Admitted','Waitlisted','Rejected'];
+const KEY = 'la_college_students_v1';
+const SESSION_YEAR = new Date().getFullYear();
+
+/* ---- storage ---- */
+function load(){
+  try{ const raw = localStorage.getItem(KEY); const d = raw ? JSON.parse(raw) : []; return Array.isArray(d) ? d : []; }
+  catch(e){ return memory; }
+}
+let memory = [];
+function save(list){
+  memory = list;
+  try{ localStorage.setItem(KEY, JSON.stringify(list)); return true; }
+  catch(e){ return false; }
+}
+let students = load();
+
+/* ---- helpers ---- */
+const $ = s => document.querySelector(s);
+function el(tag, props, ...kids){
+  const n = document.createElement(tag);
+  if(props) for(const k in props){ if(k==='class') n.className = props[k]; else if(k==='text') n.textContent = props[k]; else n.setAttribute(k, props[k]); }
+  kids.forEach(k => n.append(k));
+  return n;
+}
+function nextId(){
+  const nums = students.map(s => parseInt(String(s.id).split('-').pop(),10)).filter(n => !isNaN(n));
+  const n = (nums.length ? Math.max(...nums) : 0) + 1;
+  return 'LAC-' + SESSION_YEAR + '-' + String(n).padStart(4,'0');
+}
+
+/* ---- courses ---- */
+function refreshSelect(){
+  const sel = $('#course'); const cur = sel.value;
+  sel.replaceChildren(el('option',{value:'',text:'Select a course'}));
+  courses.forEach(c => sel.append(el('option',{value:c.code,text:c.code + ' - ' + c.name})));
+  sel.value = cur;
+}
+function renderCourses(){
+  const box = $('#courseList');
+  box.replaceChildren();
+  refreshSelect();
+  if(!courses.length && !editing){ box.append(el('p',{class:'note',text:'No courses are listed yet.'})); }
+  courses.forEach((c,i) => {
+    if(editing){
+      const mk = (field,label) => {
+        const id = 'c' + i + field;
+        const inp = el('input',{id:id,value:c[field] || ''});
+        inp.addEventListener('input', () => { c[field] = inp.value; saveSite(); refreshSelect(); });
+        return el('div',null, el('label',{for:id,text:label}), inp);
+      };
+      const rm = el('button',{class:'btn danger small',type:'button',text:'Remove'});
+      rm.addEventListener('click', () => { if(confirm('Remove the course ' + (c.code || '') + '?')){ courses.splice(i,1); saveSite(); renderCourses(); } });
+      box.append(el('div',{class:'course-edit'}, mk('code','Short name'), mk('name','Full name'), mk('years','Duration'), mk('elig','Eligibility'), rm));
+      return;
+    }
+    const h = el('h3',{text:c.code}, el('small',{text:c.name}));
+    const meta = el('div',{class:'meta',text:c.years}, el('span',{text:'Duration'}));
+    const elig = el('div',{class:'elig',text:c.elig}, el('span',{text:'Eligibility'}));
+    const btn = el('button',{class:'btn ghost small',type:'button','aria-label':'Apply for ' + c.code,text:'Apply'});
+    btn.addEventListener('click', () => {
+      $('#course').value = c.code;
+      document.getElementById('admission').scrollIntoView({behavior:'smooth'});
+      setTimeout(() => $('#course').focus({preventScroll:true}), 400);
+    });
+    box.append(el('div',{class:'course'}, h, meta, elig, btn));
+  });
+  if(editing){
+    const add = el('button',{class:'btn small',type:'button',text:'Add a course'});
+    add.addEventListener('click', () => { courses.push({code:'New course',name:'Full course name',years:'4 years',elig:'Eligibility'}); saveSite(); renderCourses(); });
+    box.append(el('div',{style:'padding-top:16px'}, add));
+  }
+}
+
+/* ---- form ---- */
+const form = $('#admissionForm');
+const rules = {
+  course: v => v ? '' : 'Choose a course.',
+  name: v => v.trim().length >= 3 ? '' : 'Enter the full name.',
+  dob: v => {
+    if(!v) return 'Enter the date of birth.';
+    const d = new Date(v), now = new Date();
+    if(isNaN(d) || d > now) return 'Enter a valid date of birth in the past.';
+    const age = (now - d) / 31557600000;
+    return age >= 16 && age <= 60 ? '' : 'Age must be between 16 and 60.';
+  },
+  gender: v => v ? '' : 'Select a gender.',
+  phone: v => /^[6-9]\d{9}$/.test(v.trim()) ? '' : 'Enter a 10-digit mobile number starting with 6, 7, 8 or 9.',
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Enter a valid email address.',
+  address: v => v.trim().length >= 8 ? '' : 'Enter the full address.',
+  guardian: v => v.trim().length >= 3 ? '' : 'Enter the guardian name.',
+  guardianPhone: v => /^[6-9]\d{9}$/.test(v.trim()) ? '' : 'Enter a 10-digit mobile number starting with 6, 7, 8 or 9.',
+  board: v => v.trim() ? '' : 'Enter the board name.',
+  percent: v => { const n = parseFloat(v); return (!isNaN(n) && n >= 0 && n <= 100) ? '' : 'Enter a percentage from 0 to 100.'; },
+  neet: v => { if(v === '') return ''; const n = parseInt(v,10); return (!isNaN(n) && n >= 0 && n <= 720) ? '' : 'NEET score must be from 0 to 720.'; }
+};
+function validateField(name){
+  const input = form.elements[name];
+  const msg = rules[name](input.value);
+  const out = form.querySelector('.err[data-for="'+name+'"]');
+  out.textContent = msg;
+  if(msg) input.setAttribute('aria-invalid','true'); else input.removeAttribute('aria-invalid');
+  return !msg;
+}
+Object.keys(rules).forEach(n => form.elements[n].addEventListener('blur', () => validateField(n)));
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let firstBad = null;
+  Object.keys(rules).forEach(n => { if(!validateField(n) && !firstBad) firstBad = form.elements[n]; });
+  const msg = $('#saveMsg');
+  if(firstBad){ firstBad.focus(); msg.classList.remove('show'); return; }
+  const f = form.elements;
+  const rec = {
+    id: nextId(),
+    course: f.course.value,
+    name: f.name.value.trim(),
+    dob: f.dob.value,
+    gender: f.gender.value,
+    phone: f.phone.value.trim(),
+    email: f.email.value.trim(),
+    address: f.address.value.trim(),
+    guardian: f.guardian.value.trim(),
+    guardianPhone: f.guardianPhone.value.trim(),
+    board: f.board.value.trim(),
+    percent: parseFloat(f.percent.value),
+    neet: f.neet.value === '' ? '' : parseInt(f.neet.value,10),
+    status: 'Applied',
+    applied: new Date().toISOString().slice(0,10)
+  };
+  students = students.concat(rec);
+  const ok = save(students);
+  form.reset();
+  msg.textContent = 'Saved application ' + rec.id + ' for ' + rec.name + '.' + (ok ? '' : ' Browser storage is blocked, so this record will be lost when you close the page. Download the CSV to keep it.');
+  msg.classList.add('show');
+  renderRows();
+});
+
+/* ---- records ---- */
+function renderRows(){
+  const q = $('#search').value.trim().toLowerCase();
+  const tbody = $('#rows');
+  tbody.replaceChildren();
+  const shown = students.filter(s => !q || (s.name + ' ' + s.id + ' ' + s.course).toLowerCase().includes(q));
+  shown.forEach(s => {
+    const sel = el('select',{'aria-label':'Status for ' + s.name});
+    STATUSES.forEach(st => { const o = el('option',{value:st,text:st}); if(st === s.status) o.selected = true; sel.append(o); });
+    sel.addEventListener('change', () => { s.status = sel.value; save(students); });
+    const view = el('button',{class:'btn ghost small',type:'button',text:'View'});
+    view.addEventListener('click', () => showDetail(s));
+    const edit = el('button',{class:'btn ghost small',type:'button',text:'Edit'});
+    edit.addEventListener('click', () => editStudent(s));
+    const del = el('button',{class:'btn danger small',type:'button',text:'Delete'});
+    del.addEventListener('click', () => {
+      if(confirm('Delete the record for ' + s.name + ' (' + s.id + ')? This cannot be undone.')){
+        students = students.filter(x => x.id !== s.id);
+        save(students);
+        renderRows();
+      }
+    });
+    tbody.append(el('tr',null,
+      el('td',{class:'id',text:s.id}),
+      el('td',{text:s.name}),
+      el('td',{text:s.course}),
+      el('td',{text:s.phone}),
+      el('td',null, sel),
+      el('td',{class:'row-actions'}, view, edit, del)
+    ));
+  });
+  $('#empty').hidden = students.length > 0;
+  $('#empty').textContent = students.length ? '' : 'No applications yet. Fill in the admission form to add the first student.';
+  if(students.length && !shown.length){ $('#empty').hidden = false; $('#empty').textContent = 'No records match your search.'; }
+  $('#count').textContent = students.length + (students.length === 1 ? ' application' : ' applications');
+}
+$('#search').addEventListener('input', renderRows);
+
+const dlg = $('#detail');
+function showDetail(s){
+  const rows = [
+    ['Number', s.id], ['Name', s.name], ['Course', s.course], ['Status', s.status],
+    ['Applied on', s.applied], ['Date of birth', s.dob], ['Gender', s.gender],
+    ['Mobile', s.phone], ['Email', s.email], ['Address', s.address],
+    ['Guardian', s.guardian], ['Guardian mobile', s.guardianPhone],
+    ['12th board', s.board], ['PCB average', s.percent + '%'],
+    ['NEET score', s.neet === '' ? 'Not given' : s.neet]
+  ];
+  $('#dlgTitle').textContent = 'Student details';
+  const dl = $('#dlgBody'); dl.replaceChildren();
+  rows.forEach(r => { dl.append(el('dt',{text:r[0]}), el('dd',{text:String(r[1])})); });
+  if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+}
+$('#dlgClose').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if(e.target === dlg) dlg.close(); });
+
+/* ---- CSV export ---- */
+function csvCell(v){
+  let s = String(v === undefined || v === null ? '' : v);
+  if(/^[=+\-@\t\r]/.test(s)) s = "'" + s;   // stop spreadsheet formula injection
+  return '"' + s.replace(/"/g,'""') + '"';
+}
+$('#exportBtn').addEventListener('click', () => {
+  if(!students.length){ alert('There are no records to download yet.'); return; }
+  const cols = [['id','Number'],['name','Name'],['course','Course'],['status','Status'],['applied','Applied on'],['dob','Date of birth'],['gender','Gender'],['phone','Mobile'],['email','Email'],['address','Address'],['guardian','Guardian'],['guardianPhone','Guardian mobile'],['board','12th board'],['percent','PCB average %'],['neet','NEET score']];
+  const lines = [cols.map(c => csvCell(c[1])).join(',')].concat(students.map(s => cols.map(c => csvCell(s[c[0]])).join(',')));
+  const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'la-college-students.csv';
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+/* ---- start ---- */
+/* ---- edit a student ---- */
+function editStudent(s){
+  $('#dlgTitle').textContent = 'Edit ' + s.id;
+  const dl = $('#dlgBody'); dl.replaceChildren();
+  const fields = [
+    ['name','Name','text'],['course','Course','course'],['status','Status','status'],['dob','Date of birth','date'],
+    ['gender','Gender','gender'],['phone','Mobile','tel'],['email','Email','email'],['address','Address','area'],
+    ['guardian','Guardian','text'],['guardianPhone','Guardian mobile','tel'],['board','12th board','text'],
+    ['percent','PCB average %','number'],['neet','NEET score','number']
+  ];
+  const inputs = {};
+  fields.forEach(([k,label,type]) => {
+    const id = 'ed_' + k;
+    let inp;
+    if(type === 'course' || type === 'status' || type === 'gender'){
+      inp = el('select',{id:id});
+      let opts = type === 'course' ? courses.map(c => c.code) : type === 'status' ? STATUSES : ['Female','Male','Other'];
+      if(type === 'course' && !opts.includes(s.course)) opts = [s.course].concat(opts);
+      opts.forEach(o => { const op = el('option',{value:o,text:o}); if(o === s[k]) op.selected = true; inp.append(op); });
+    } else if(type === 'area'){
+      inp = el('textarea',{id:id}); inp.value = s[k] || '';
+    } else {
+      inp = el('input',{id:id,type:type}); inp.value = s[k] === undefined ? '' : s[k];
+      if(type === 'number') inp.setAttribute('step', k === 'percent' ? '0.01' : '1');
+    }
+    inputs[k] = inp;
+    dl.append(el('dt',null, el('label',{for:id,text:label})), el('dd',null, inp));
+  });
+  const err = el('div',{class:'err',role:'alert'});
+  const save = el('button',{class:'btn',type:'button',text:'Save changes'});
+  const cancel = el('button',{class:'btn ghost',type:'button',text:'Cancel'});
+  cancel.addEventListener('click', () => dlg.close());
+  save.addEventListener('click', () => {
+    for(const k of Object.keys(rules)){
+      if(!(k in inputs)) continue;
+      const m = rules[k](inputs[k].value);
+      if(m){ err.textContent = label_of(k) + ': ' + m; inputs[k].focus(); return; }
+    }
+    fields.forEach(([k,,type]) => {
+      const v = inputs[k].value;
+      s[k] = k === 'percent' ? parseFloat(v) : k === 'neet' ? (v === '' ? '' : parseInt(v,10)) : (type === 'text' || type === 'tel' || type === 'email' || type === 'area') ? v.trim() : v;
+    });
+    save_students();
+    dlg.close();
+    renderRows();
+  });
+  function label_of(k){ const f = fields.find(x => x[0] === k); return f ? f[1] : k; }
+  dl.append(err, el('dd',{style:'grid-column:1 / -1;display:flex;gap:10px'}, save, cancel));
+  if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+}
+function save_students(){ save(students); }
+
+/* ---- edit mode for site text ---- */
+let editing = false;
+const keyEls = document.querySelectorAll('[data-key]');
+function syncName(){
+  const nm = (site.texts.collegeName || 'LA College').trim() || 'LA College';
+  const ini = nm.split(/\s+/).map(w => w[0] || '').join('').slice(0,3).toUpperCase() || 'LA';
+  $('#mark').textContent = ini;
+  $('#footName').textContent = nm;
+  document.title = nm + ' | Medical College';
+}
+keyEls.forEach(n => {
+  const k = n.dataset.key;
+  if(typeof site.texts[k] === 'string') n.textContent = site.texts[k];
+  n.addEventListener('input', () => { site.texts[k] = n.textContent; saveSite(); syncName(); });
+  n.addEventListener('keydown', e => { if(editing && e.key === ' ') e.stopPropagation(); });
+});
+$('#brandLink').addEventListener('click', e => { if(editing) e.preventDefault(); });
+function setEditing(on){
+  editing = on;
+  document.body.classList.toggle('editing', on);
+  keyEls.forEach(n => {
+    if(on){ n.contentEditable = 'plaintext-only'; if(n.contentEditable !== 'plaintext-only') n.contentEditable = 'true'; }
+    else n.removeAttribute('contenteditable');
+  });
+  $('#editToggle').textContent = on ? 'Done editing' : 'Edit site';
+  $('#editBar').hidden = !on;
+  renderCourses();
+}
+$('#editToggle').addEventListener('click', () => setEditing(!editing));
+
+$('#backupBtn').addEventListener('click', () => {
+  const data = {app:'la-college', version:1, site:{texts:site.texts, courses:courses}, students:students};
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'la-college-backup.json';
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+$('#restoreBtn').addEventListener('click', () => $('#restoreFile').click());
+$('#restoreFile').addEventListener('change', e => {
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try{
+      const d = JSON.parse(r.result);
+      if(!d || d.app !== 'la-college' || !Array.isArray(d.students) || !d.site) throw new Error('bad');
+      if(!confirm('Replace the current site text, courses and ' + students.length + ' student records with this backup?')) return;
+      site.texts = d.site.texts || {};
+      courses = Array.isArray(d.site.courses) ? d.site.courses : courses;
+      students = d.students;
+      saveSite(); save(students);
+      location.reload();
+    }catch(err){ alert('This file is not a LA College backup.'); }
+  };
+  r.readAsText(f);
+  e.target.value = '';
+});
+$('#resetBtn').addEventListener('click', () => {
+  if(confirm('Reset the site text and courses to the original sample content? Student records are kept.')){
+    try{ localStorage.removeItem(SITE_KEY); }catch(e){}
+    location.reload();
+  }
+});
+
+/* ---- start ---- */
+$('#yr').textContent = SESSION_YEAR;
+syncName();
+renderCourses();
+renderRows();
+</script>
+</body>
+</html>
